@@ -1,35 +1,36 @@
 """
-You are given two strings word1 and word2.
+Kids with the Greatest Number of Candies
 
-Merge the strings by adding letters in alternating order, starting with word1.
+There are n kids with candies.
 
-If a string is longer than the other, append the additional letters onto the end of the merged string.
+You are given an integer array candies, where each candies[i] represents the number of candies the ith kid has,
+and an integer extraCandies, denoting the number of extra candies that you have.
 
-Return the merged string.
+Return a boolean array result of length n, where result[i] is true if, after giving the ith kid all the extraCandies,
+they will have the greatest number of candies among all the kids, or false otherwise.
+
+Note that multiple kids can have the greatest number of candies.
 
 """
 
 
-def merge_alternately(word1, word2):
+def kids_with_candies(candies, extraCandies):
     """
-    :type word1: str
-    :type word2: str
-    :rtype: str
+    :type candies: List[int]
+    :type extraCandies: int
+    :rtype: List[bool]
     """
-    output_word = ""    # we'll build this as we go
 
-    len_word1 = len(word1)
-    len_word2 = len(word2)
-    max_len = max(len_word1, len_word2)
+    result = []
+    max_candies = max(candies)
 
-    for i in range(max_len):
-        if i < len_word1:
-            output_word += word1[i]
+    # Find the result of whether adding extra_candies to each kid will get them more than the current max
+    for kid_candies in candies:
+        new_candies = kid_candies + extraCandies
+        result.append(new_candies >= max_candies)
 
-        if i < len_word2:
-            output_word += word2[i]
-
-    return output_word
+    return result
 
 
-print(merge_alternately("test", "testnew"))
+kids_with_candies([5, 3, 5, 1], 3)
+
